@@ -1,0 +1,11 @@
+# .gitignore内容：  
+password.txt  
+  
+其余用法：  
+# 忽略文件夹  
+css  
+# 忽略文件夹下的某个文件  
+css/index.js  
+# 忽略文件夹下某类文件  
+css/*.js  
+

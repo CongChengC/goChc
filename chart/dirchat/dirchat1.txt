@@ -1,0 +1,10 @@
+Git dirchat文件夹 add 测试
+# 将 index.html 添加到暂存区  
+git add index.html  
+  
+# 将css目录下一切添加到暂存区  
+git add css  
+
+第二次修改测试
+
+第二次修改测试
