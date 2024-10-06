@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 type MyHandler struct{}
@@ -17,15 +18,18 @@ func main() {
 	myHandler := MyHandler{}
 
 	//例子1
-	http.Handle("/myHandler", &myHandler)
-	http.ListenAndServe(":8080", nil)
+	//http://localhost:8080/myHandler
+	// http.Handle("/myHandler", &myHandler)
+	// http.ListenAndServe(":8080", nil)
 
+	//例子2
+	//http://localhost:8080/myHandler
 	//创建Server结构，并详细配置里面的字段
-	// server := http.Server{
-	// 	Addr:        ":8080",
-	// 	Handler:     &myHandler,
-	// 	ReadTimeout: 2 * time.Second,
-	// }
-	// server.ListenAndServe()
+	server := http.Server{
+		Addr:        ":8080",
+		Handler:     &myHandler,
+		ReadTimeout: 2 * time.Second,
+	}
+	server.ListenAndServe()
 
 }
