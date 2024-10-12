@@ -24,7 +24,7 @@ func (user *User) AddUser() error {
 		return err
 	}
 	//3.执行
-	_, err2 := inStmt.Exec("admin", "123456", "admin@atguigu.com")
+	_, err2 := inStmt.Exec("adminCode", "123456", "adminCode@163.com")
 	if err2 != nil {
 		fmt.Println("执行出现异常：", err2)
 		return err
@@ -37,7 +37,7 @@ func (user *User) AddUser2() error {
 	//1.写sql语句
 	sqlStr := "insert into users(username,password,email) values(?,?,?)"
 	//2.执行
-	_, err := utils.Db.Exec(sqlStr, "admin2", "666666", "admin2@sina.com")
+	_, err := utils.Db.Exec(sqlStr, "adminCode2", "666666", "adminCode2@sina.com")
 	if err != nil {
 		fmt.Println("执行出现异常：", err)
 		return err
