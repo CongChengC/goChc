@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"goChc/bookstore/web01_db/model"
 	"net/http"
 	//"web02_req/model"
 )
@@ -38,34 +40,36 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// func testJsonRes(w http.ResponseWriter, r *http.Request) {
-// 	//设置响应内容的类型
-// 	w.Header().Set("Content-Type", "application/json")
-// 	//创建User
-// 	user := model.User{
-// 		ID:       1,
-// 		Username: "admin",
-// 		Password: "123456",
-// 		Email:    "admin@atguigiu.com",
-// 	}
-// 	//将User转换为Json个数
-// 	json, _ := json.Marshal(user)
-// 	//将json格式的数据响应给客户端
-// 	w.Write(json)
-// }
+func testJsonRes(w http.ResponseWriter, r *http.Request) {
+	//设置响应内容的类型
+	w.Header().Set("Content-Type", "application/json")
+	//创建User
+	user := model.User{
+		ID:       1,
+		Username: "admin",
+		Password: "123456",
+		Email:    "admin@qq.com",
+	}
+	//将User转换为Json个数
+	json, _ := json.Marshal(user)
+	//将json格式的数据响应给客户端
+	w.Write(json)
+}
 
-// func testRedire(w http.ResponseWriter, r *http.Request) {
-// 	//设置响应头中的Location属性
-// 	w.Header().Set("Location", "https://www.baidu.com")
-// 	//设置响应的状态码
-// 	w.WriteHeader(302)
-// }
+func testRedire(w http.ResponseWriter, r *http.Request) {
+	//设置响应头中的Location属性
+	w.Header().Set("Location", "https://www.baidu.com")
+	//设置响应的状态码
+	w.WriteHeader(302)
+}
 
 func main() {
 	//http://localhost:8080/hello?user=admin&pwd=123
 	http.HandleFunc("/hello", handler)
-	// http.HandleFunc("/testJson", testJsonRes)
-	// http.HandleFunc("/testRedirect", testRedire)
+	//http://localhost:8080/testJson?
+	http.HandleFunc("/testJson", testJsonRes)
+	//http://localhost:8080/testRedirect?
+	http.HandleFunc("/testRedirect", testRedire)
 
 	http.ListenAndServe(":8080", nil)
 }
