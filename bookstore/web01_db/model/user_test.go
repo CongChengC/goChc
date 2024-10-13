@@ -28,8 +28,8 @@ func TestUser(t *testing.T) {
 	fmt.Println("开始测试User中的相关方法")
 	//通过t.Run()来执行子测试函数
 	t.Run("测试添加用户:", testAddUser)
-	//t.Run("测试获取用户:", testGetUserByID)
-	// t.Run("测试获取用户:", testGetUsers)
+	t.Run("测试获取用户:", testGetUserByID)
+	t.Run("测试获取用户:", testGetUsers)
 }
 
 // 测试方式二之2
@@ -42,32 +42,31 @@ func testAddUser(t *testing.T) {
 	user.AddUser2()
 }
 
-// // 测试获取一个User
-// func testGetUserByID(t *testing.T) {
-// 	fmt.Println("测试查询一条记录：")
-// 	user := User{
-// 		ID: 1,
-// 	}
-// 	//调用获取User的方法
-// 	u, _ := user.GetUserByID()
-// 	fmt.Println("得到的User的信息是：", u)
-// }
+// 测试获取一个User
+func testGetUserByID(t *testing.T) {
+	fmt.Println("测试查询一条记录：")
+	user := User{
+		ID: 1,
+	}
+	//调用获取User的方法
+	u, _ := user.GetUserByID()
+	fmt.Println("得到的User的信息是：", u)
+}
 
-// // 测试获取所有User
-// func testGetUsers(t *testing.T) {
-// 	fmt.Println("测试查询所有记录：")
-// 	user := &User{}
-// 	//调用获取所有User的方法
-// 	us, _ := user.GetUsers()
-// 	//遍历切片
-// 	for k, v := range us {
-// 		fmt.Printf("第%v个用户是:%v\n", k+1, v)
-// 	}
-
-// }
+// 测试获取所有User
+func testGetUsers(t *testing.T) {
+	fmt.Println("测试查询所有记录：")
+	user := &User{}
+	//调用获取所有User的方法
+	us, _ := user.GetUsers()
+	//遍历切片
+	for k, v := range us {
+		fmt.Printf("第%v个用户是:%v\n", k+1, v)
+	}
+}
 
 // 测试方式一
-// 往test数据库添加两个账户
+// // 往test数据库添加两个账户
 // func TestAddUser(t *testing.T) {
 // 	fmt.Println("子测试函数执行：")
 // 	user := &User{}
