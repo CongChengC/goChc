@@ -9,3 +9,6 @@ css/index.js
 # 忽略文件夹下某类文件  
 css/*.js  
 
+# 忽略exe
+*.exe
+
