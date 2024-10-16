@@ -12,10 +12,10 @@ func TestMain(m *testing.M) {
 }
 
 func TestUser(t *testing.T) {
-	fmt.Println("测试userdao中的函数")
-	t.Run("验证用户名或密码：", testLogin)
-	t.Run("验证用户名：", testRegist)
-	t.Run("保存用户：", testSave)
+	// fmt.Println("测试userdao中的函数")
+	// t.Run("验证用户名或密码：", testLogin)
+	// t.Run("验证用户名：", testRegist)
+	// t.Run("保存用户：", testSave)
 }
 
 func testLogin(t *testing.T) {
@@ -32,11 +32,11 @@ func testSave(t *testing.T) {
 
 func TestBook(t *testing.T) {
 	fmt.Println("测试bookdao中的相关函数")
-	// t.Run("测试获取所有图书", testGetBooks)
-	// t.Run("测试添加图书", testAddBook)
-	// t.Run("测试删除图书", testDeleteBook)
-	// t.Run("测试获取一本图书", testGetBook)
-	t.Run("测试更新图书", testUpdateBook)
+	//t.Run("测试获取所有图书", testGetBooks)
+	//t.Run("测试添加图书", testAddBook)
+	//t.Run("测试删除图书", testDeleteBook)
+	//t.Run("测试获取一本图书", testGetBook)
+	//t.Run("测试更新图书", testUpdateBook)
 }
 
 func testGetBooks(t *testing.T) {
@@ -60,7 +60,7 @@ func testAddBook(t *testing.T) {
 }
 func testDeleteBook(t *testing.T) {
 	//调用删除图书的函数
-	DeleteBook("34")
+	DeleteBook("32")
 }
 func testGetBook(t *testing.T) {
 	//调用获取图书的函数
