@@ -4,6 +4,22 @@
 <meta charset="UTF-8">
 <title>图书管理</title>
 <link type="text/css" rel="stylesheet" href="/static/css/style.css" >
+<script src="/static/script/jquery-1.7.2.js"></script>
+<script>
+	$(function(){
+		//给删除图书的超链接绑定单击事件
+		$(".deleteBook").click(function(){
+			//获取书名
+			var title = $(this).attr("id");
+			// var flag = confirm("确定要删除【"+title+"】这本图书吗？");
+			// if(!flag){
+			// 	//取消默认行为
+			// 	return false;
+			// }
+			return confirm("确定要删除【"+title+"】这本图书吗？");
+		});
+	});
+</script>
 </head>
 <body>
 	
@@ -11,7 +27,7 @@
 			<img class="logo_img" alt="" src="/static/img/logo.gif" >
 			<span class="wel_word">图书管理系统</span>
 			<div>
-				<a href="/pages/manager/book_manager.html">图书管理</a>
+				<a href="/getBooks">图书管理</a>
 				<a href="/">返回商城</a>
 			</div>
 	</div>
@@ -25,47 +41,18 @@
 				<td>销量</td>
 				<td>库存</td>
 				<td colspan="2">操作</td>
-			</tr>		
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="/pages/manager/book_edit.html">修改</a></td>
-				<td><a href="#">删除</a></td>
 			</tr>	
-			
+		{{range .}}		
 			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.html">修改</a></td>
-				<td><a href="#">删除</a></td>
+				<td>{{.Title}}</td>
+				<td>{{.Price}}</td>
+				<td>{{.Author}}</td>
+				<td>{{.Sales}}</td>
+				<td>{{.Stock}}</td>
+				<td><a href="/toUpdateBookPage?bookId={{.ID}}">修改</a></td>
+				<td><a id="{{.Title}}" class="deleteBook" href="/deleteBook?bookId={{.ID}}">删除</a></td>
 			</tr>	
-			
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.html">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
-			
-			<tr>
-				<td>时间简史</td>
-				<td>20.00</td>
-				<td>霍金</td>
-				<td>200</td>
-				<td>400</td>
-				<td><a href="book_edit.html">修改</a></td>
-				<td><a href="#">删除</a></td>
-			</tr>	
-			
+		{{end}}
 			<tr>
 				<td></td>
 				<td></td>
