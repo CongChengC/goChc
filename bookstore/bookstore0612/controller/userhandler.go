@@ -1,27 +1,72 @@
 package controller
 
 import (
-	"fmt"
 	"goChc/bookstore/bookstore0612/dao"
+	"goChc/bookstore/bookstore0612/model"
+	"goChc/bookstore/bookstore0612/utils"
 	"html/template"
 	"net/http"
 )
 
+// Logout //处理用户注销的函数
+func Logout(w http.ResponseWriter, r *http.Request) {
+	//获取Cookie
+	cookie, _ := r.Cookie("user")
+	if cookie != nil {
+		//获取cookie的value值
+		cookieValue := cookie.Value
+		//删除数据库中与之对应的Session
+		dao.DeleteSession(cookieValue)
+		//设置cookie失效
+		cookie.MaxAge = -1
+		//将修改之后的cookie发送给浏览器
+		http.SetCookie(w, cookie)
+	}
+	//去首页
+	GetPageBooksByPrice(w, r)
+}
+
 // Login 处理用户登录的函数
 func Login(w http.ResponseWriter, r *http.Request) {
-	//获取用户名和密码
-	username := r.PostFormValue("username")
-	password := r.PostFormValue("password")
-	//调用userdao中验证用户名和密码的方法
-	user, _ := dao.CheckUserNameAndPassword(username, password)
-	if user.ID > 0 {
-		//用户名和密码正确
-		t := template.Must(template.ParseFiles("views/pages/user/login_success.html"))
-		t.Execute(w, "")
+	//判断是否已经登录
+	flag, _ := dao.IsLogin(r)
+	if flag {
+		//已经登录
+		//去首页
+		GetPageBooksByPrice(w, r)
 	} else {
-		//用户名或密码不正确
-		t := template.Must(template.ParseFiles("views/pages/user/login.html"))
-		t.Execute(w, "用户名或密码不正确！")
+		//获取用户名和密码
+		username := r.PostFormValue("username")
+		password := r.PostFormValue("password")
+		//调用userdao中验证用户名和密码的方法
+		user, _ := dao.CheckUserNameAndPassword(username, password)
+		if user.ID > 0 {
+			//用户名和密码正确
+			//生成UUID作为Session的id
+			uuid := utils.CreateUUID()
+			//创建一个Session
+			sess := &model.Session{
+				SessionID: uuid,
+				UserName:  user.Username,
+				UserID:    user.ID,
+			}
+			//将Session保存到数据库中
+			dao.AddSession(sess)
+			//创建一个Cookie，让它与Session相关联
+			cookie := http.Cookie{
+				Name:     "user",
+				Value:    uuid,
+				HttpOnly: true,
+			}
+			//将cookie发送给浏览器
+			http.SetCookie(w, &cookie)
+			t := template.Must(template.ParseFiles("views/pages/user/login_success.html"))
+			t.Execute(w, user)
+		} else {
+			//用户名或密码不正确
+			t := template.Must(template.ParseFiles("views/pages/user/login.html"))
+			t.Execute(w, "用户名或密码不正确！")
+		}
 	}
 }
 
@@ -50,7 +95,6 @@ func Regist(w http.ResponseWriter, r *http.Request) {
 func CheckUserName(w http.ResponseWriter, r *http.Request) {
 	//获取用户输入的用户名
 	username := r.PostFormValue("username")
-	fmt.Println("您输入的用户名是:", username)
 	//调用userdao中验证用户名和密码的方法
 	user, _ := dao.CheckUserName(username)
 	if user.ID > 0 {

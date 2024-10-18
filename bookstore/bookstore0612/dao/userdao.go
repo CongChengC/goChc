@@ -5,7 +5,7 @@ import (
 	"goChc/bookstore/bookstore0612/utils"
 )
 
-// CheckUserNameAndPassword 根据用户名和密码从数据库中查询一条记录
+//CheckUserNameAndPassword 根据用户名和密码从数据库中查询一条记录
 func CheckUserNameAndPassword(username string, password string) (*model.User, error) {
 	//写sql语句
 	sqlStr := "select id,username,password,email from users where username = ? and password = ?"
@@ -16,7 +16,7 @@ func CheckUserNameAndPassword(username string, password string) (*model.User, er
 	return user, nil
 }
 
-// CheckUserName 根据用户名和密码从数据库中查询一条记录
+//CheckUserName 根据用户名和密码从数据库中查询一条记录
 func CheckUserName(username string) (*model.User, error) {
 	//写sql语句
 	sqlStr := "select id,username,password,email from users where username = ?"
@@ -27,7 +27,7 @@ func CheckUserName(username string) (*model.User, error) {
 	return user, nil
 }
 
-// SaveUser 向数据库中插入用户信息
+//SaveUser 向数据库中插入用户信息
 func SaveUser(username string, password string, email string) error {
 	//写sql语句
 	sqlStr := "insert into users(username,password,email) values(?,?,?)"

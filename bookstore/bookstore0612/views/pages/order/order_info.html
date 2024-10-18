@@ -2,20 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>后台管理</title>
+<title>订单详情</title>
 <link type="text/css" rel="stylesheet" href="/static/css/style.css" >
-<style type="text/css">
-	h1 {
-		text-align: center;
-		margin-top: 200px;
-	}
-</style>
 </head>
 <body>
-	
 	<div id="header">
 			<img class="logo_img" alt="" src="/static/img/logo.gif" >
-			<span class="wel_word">后台管理系统</span>
+			<span class="wel_word">订单详情</span>
 			<div>
 				<a href="/getPageBooks">图书管理</a>
 				<a href="/getOrders">订单管理</a>
@@ -24,7 +17,28 @@
 	</div>
 	
 	<div id="main">
-		<h1>欢迎管理员进入后台管理系统</h1>
+		<table>
+			<tr>
+				<th>封面</th>
+				<th>书名</th>
+				<th>作者</th>
+				<th>价格</th>
+				<th>数量</th>
+				<th>金额</th>
+			</tr>		
+		{{range .}}
+			<tr>
+				<td>
+					<img class="book_img" src="{{.ImgPath}}" />
+				</td>
+				<td>{{.Title}}</td>
+				<td>{{.Author}}</td>
+				<td>{{.Price}}</td>
+				<td>{{.Count}}</td>
+				<td>{{.Amount}}</td>
+			</tr>
+		{{end}}		
+		</table>
 	</div>
 	
 	<div id="bottom">
