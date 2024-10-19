@@ -16,7 +16,7 @@ FOREIGN KEY(user_id) REFERENCES users(id)
 )
 
 -- 创建购物项表
-CREATE TABLE cart_itmes(
+CREATE TABLE cart_items(
 id INT PRIMARY KEY AUTO_INCREMENT,
 COUNT INT NOT NULL,
 amount DOUBLE(11,2) NOT NULL,

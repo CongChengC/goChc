@@ -106,8 +106,8 @@ func testGetPageBooksByPrice(t *testing.T) {
 }
 
 func TestSession(t *testing.T) {
-	// fmt.Println("测试Session相关函数")
-	// t.Run("测试添加Session", testAddSession)
+	fmt.Println("测试Session相关函数")
+	//t.Run("测试添加Session", testAddSession)
 	// t.Run("测试删除Session", testDeleteSession)
 	// t.Run("测试获取Session", testGetSession)
 }
@@ -116,7 +116,7 @@ func testAddSession(t *testing.T) {
 	sess := &model.Session{
 		SessionID: "13838381438",
 		UserName:  "马蓉",
-		UserID:    5,
+		UserID:    3,
 	}
 	AddSession(sess)
 }
